@@ -1,16 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./Navigation.module.css";
+import { Footer } from "../Footer";
 
 const Navigation = () => {
   return (
     <nav className={style.navigation}>
-      <div className={style.title}>
-        єСпорт
-      </div>
+      <div className={style.title}>єСпорт</div>
       <div className={style.links}>
         <NavLink
-          to="/ipLookup"
+          // onClick={scrollToFooter}
+          to="/footer"
           className={({ isActive }) =>
             isActive ? style.selected : style.unselected
           }

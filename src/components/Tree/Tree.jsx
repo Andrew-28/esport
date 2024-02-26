@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Tree.module.css";
+// import styles from "./Tree.module.css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -39,9 +39,9 @@ export default function Tree() {
         <Button onClick={handleExpandClick}>
           {expanded.length === 0 ? "Розгорнути все" : "Згорнути все"}
         </Button>
-        <Button onClick={handleSelectClick}>
+        {/* <Button onClick={handleSelectClick}>
           {selected.length === 0 ? "Обрати все" : "Скасувати"}
-        </Button>
+        </Button> */}
       </Box>
       <TreeView
         aria-label="controlled"
