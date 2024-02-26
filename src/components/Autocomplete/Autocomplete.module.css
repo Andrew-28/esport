@@ -1,0 +1,8 @@
+.autocomplete {
+  background-color: rgb(255, 255, 255);
+  color: white;
+}
+
+.autocomplete > input { 
+    color: white;
+}
