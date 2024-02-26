@@ -1,3 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+@font-face {
+  font-family: "Dnipro";
+  src: url("./utils/fonts/DniproCity-Regular.6980d841aa7b28436da8.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: "Dnipro", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .contentContainer {
   display: flex;
   flex-direction: row;

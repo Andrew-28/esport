@@ -1,5 +1,5 @@
 import React from "react";
-// import styles from "./Tree.module.css";
+import styles from "./Tree.module.css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -48,7 +48,10 @@ const Tree = ({ individual, team }) => {
   };
 
   return (
-    <Box sx={{ minHeight: 270, flexGrow: 1, maxWidth: 350 }}>
+    <Box
+      className={styles.tree}
+      sx={{ minHeight: 270, flexGrow: 1, maxWidth: 350 }}
+    >
       <Box sx={{ mb: 1 }}>
         <Button onClick={handleExpandClick}>
           {expanded.length === 0 ? "Розгорнути все" : "Згорнути все"}

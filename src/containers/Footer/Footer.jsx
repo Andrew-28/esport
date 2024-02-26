@@ -11,21 +11,22 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
 export default function Footer() {
   return (
-    <MDBFooter className="bg-dark text-center text-white">
+    <MDBFooter id="footer" className="bg-dark text-center text-white">
       <MDBContainer className="p-4 pb-0">
-        <section className="mb-4">
+        <section>
           <MDBBtn
             outline
             color="light"
             floating
             className="m-1"
-            href="#!"
+            href="https://www.facebook.com/kpednipro"
             role="button"
+            target="_blank"
           >
             <MDBIcon fab icon="facebook-f" />
           </MDBBtn>
 
-          <MDBBtn
+          {/* <MDBBtn
             outline
             color="light"
             floating
@@ -34,6 +35,18 @@ export default function Footer() {
             role="button"
           >
             <MDBIcon fab icon="twitter" />
+          </MDBBtn> */}
+
+          <MDBBtn
+            outline
+            color="light"
+            floating
+            className="m-1"
+            href="https://ednipro.dp.ua"
+            role="button"
+            target="_blank"
+          >
+            <MDBIcon fab icon="google" />
           </MDBBtn>
 
           <MDBBtn
@@ -41,23 +54,14 @@ export default function Footer() {
             color="light"
             floating
             className="m-1"
-            href="#!"
+            href="https://www.instagram.com/ednipro"
             role="button"
-          >
-            <MDBIcon fab icon="google" />
-          </MDBBtn>
-          <MDBBtn
-            outline
-            color="light"
-            floating
-            className="m-1"
-            href="#!"
-            role="button"
+            target="_blank"
           >
             <MDBIcon fab icon="instagram" />
           </MDBBtn>
 
-          <MDBBtn
+          {/* <MDBBtn
             outline
             color="light"
             floating
@@ -66,17 +70,18 @@ export default function Footer() {
             role="button"
           >
             <MDBIcon fab icon="linkedin-in" />
-          </MDBBtn>
+          </MDBBtn> */}
 
           <MDBBtn
             outline
             color="light"
             floating
             className="m-1"
-            href="#!"
+            href="https://t.me/kp_ednipro"
             role="button"
+            target="_blank"
           >
-            <MDBIcon fab icon="github" />
+            <MDBIcon fab icon="telegram" />
           </MDBBtn>
         </section>
       </MDBContainer>
@@ -85,7 +90,7 @@ export default function Footer() {
         className="text-center p-3"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
-        © 2024 єДніпро
+        © 2024 КП єДніпро
       </div>
     </MDBFooter>
   );
