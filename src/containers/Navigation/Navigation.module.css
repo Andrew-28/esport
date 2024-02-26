@@ -43,28 +43,21 @@ a {
   transition: 0.3s;
 }
 
-.selected {
+/* .selected {
   background-color: #828282;
   color: rgb(0, 0, 0);
   box-shadow: none;
-}
+} */
 
 .unselected {
   background-color: none;
   color: rgb(255, 255, 255);
 }
 
-a {  
-  box-shadow: 
-    0.3em 0.3em 0 0 #e2e2e2,
-    inset 0.3em 0.3em 0 0 #e2e2e2;
+a {
+  box-shadow: 0.3em 0.3em 0 0 #e2e2e2, inset 0.3em 0.3em 0 0 #e2e2e2;
 }
 
 a:hover {
   color: rgb(78, 50, 203);
-}
-a:focus {
-  box-shadow: 
-    0 0 0 0 #828282,
-    inset 6em 3.5em 0 0 #828282;
 }

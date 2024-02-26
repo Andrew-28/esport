@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./Navigation.module.css";
 import { Footer } from "../Footer";
 
@@ -8,23 +8,15 @@ const Navigation = () => {
     <nav className={style.navigation}>
       <div className={style.title}>єСпорт</div>
       <div className={style.links}>
-        <NavLink
-          // onClick={scrollToFooter}
+        <Link
           to="/footer"
-          className={({ isActive }) =>
-            isActive ? style.selected : style.unselected
-          }
+          className={style.unselected}
         >
           Про нас
-        </NavLink>
-        <NavLink
-          to="/imageToText"
-          className={({ isActive }) =>
-            isActive ? style.selected : style.unselected
-          }
-        >
+        </Link>
+        <Link to="/imageToText" className={style.unselected}>
           Авторизуватися
-        </NavLink>
+        </Link>
       </div>
     </nav>
   );
