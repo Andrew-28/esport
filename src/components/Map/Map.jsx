@@ -1,109 +1,45 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { GoogleMap, DirectionsRenderer, Marker } from "@react-google-maps/api";
-import { defaultOptions, containerStyle } from "./defaultOptions";
+import React from "react";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 
-export const MODES = {
-  MOVE: 0,
-  SET_MARKER: 1,
-};
+const Map = () => {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyCi3tUbZSYeHIRuqRk1K545Q_M-TWSNKxk",
+  });
 
-//   interface Props {
-//     center: Coordinates;
-//     mode: Mode | number;
-//     markers: Coordinates[];
-//     onMarkerAdd: (coordinates: Coordinates) => void;
-//     pathById: string | undefined;
-//   }
+  const containerStyle = {
+    width: "800px",
+    height: "685px",
+  };
 
-const Map = ({ center, mode, markers, onMarkerAdd, pathById }) => {
-  const [map, setMap] = useState(null);
-  const mapRef = useRef(undefined);
-  const [directions, setDirections] = useState(null);
-  const [point, setPoint] = useState([]);
+  const mapRef = React.useRef(undefined);
 
-  const onLoad = useCallback((map) => {
+  const onLoad = React.useCallback(function callback(map) {
     mapRef.current = map;
   }, []);
 
-  const onUnmount = useCallback((map) => {
+  const onUnmount = React.useCallback(function callback(map) {
     mapRef.current = undefined;
   }, []);
-
-  const onClick = useCallback(
-    (loc) => {
-      if (mode === MODES.SET_MARKER) {
-        const latLng = loc.latLng;
-        if (latLng !== null) {
-          const lat = latLng.lat();
-          const lng = latLng.lng();
-          onMarkerAdd({ lat, lng });
-        }
-      }
-    },
-    [mode, onMarkerAdd]
-  );
-
-  const handleDirectionsService = (response) => {
-    try {
-      if (!response) {
-        throw new Error("No response received");
-      }
-
-      const route = response.routes[0];
-
-      let distance = 0;
-
-      for (let i = 0; i < route.legs.length; i++) {
-        const leg = route.legs[i];
-
-        if (!leg.distance) {
-          throw new Error("Distance not found for leg");
-        }
-
-        distance += leg.distance.value;
-      }
-
-      let range = "";
-
-      if (distance > 1000) {
-        range = `${distance / 1000} km`;
-      } else {
-        range = `${distance} m`;
-      }
-
-      setDirections(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <div className="map">
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        options={defaultOptions}
-        onClick={onClick}
-      >
-        {point.map((pos, index) => {
-          return <Marker key={index} position={pos} />;
-        })}
-        {directions && (
-          <DirectionsRenderer
-            directions={directions}
-            options={{ suppressMarkers: true }}
-          />
-        )}
-      </GoogleMap>
+    <div width="100%">
+      {isLoaded ? (
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={{
+            lat: -3.745,
+            lng: -38.523,
+          }}
+          zoom={10}
+          onLoad={onLoad}
+          onUnmount={onUnmount}
+        >
+          {/* Child components, such as markers, info windows, etc. */}
+          <></>
+        </GoogleMap>
+      ) : (
+        <h3>Map not found</h3>
+      )}
     </div>
   );
 };

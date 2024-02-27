@@ -1,10 +1,10 @@
 .autocomplete {
   background-color: rgb(255, 255, 255);
-  color: white;
+  color: rgb(0, 0, 0);
   /* position: fixed;
   top: 70px; */
 }
 
-.autocomplete > input { 
-    color: white;
+.autocomplete > input {
+  color: rgb(0, 0, 0);
 }

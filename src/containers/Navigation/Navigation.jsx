@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, animateScroll } from "react-scroll";
+import { Route, Routes } from "react-router-dom";
 import style from "./Navigation.module.css";
-import { Footer } from "../Footer";
+import { Login } from "../Authorization/Login";
 
 const Navigation = () => {
   return (
@@ -22,7 +23,7 @@ const Navigation = () => {
         >
           Про нас
         </Link>
-        <Link to="/imageToText" className={style.btn}>
+        <Link to="/Login" className={style.btn}>
           Авторизуватися
         </Link>
       </div>
