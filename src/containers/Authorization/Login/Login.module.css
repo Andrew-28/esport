@@ -4,6 +4,14 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.loginForm {
+  max-width: 300px;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .formTitle {
@@ -16,6 +24,10 @@ form {
 
 .inputGroup {
   margin-bottom: 20px;
+  max-width: 500px;
+  padding: 16px;
+  text-align: left;
+  margin: 0 auto;
 }
 
 .inputLabel {
@@ -32,6 +44,7 @@ form {
 .btnContainer {
   display: flex;
   justify-content: center;
+  border: none; 
 }
 
 .btn {
@@ -46,7 +59,7 @@ form {
 }
 
 .btn:hover {
-  background-color: #3a3a3a;
+  background-color: #363636;
 }
 
 .registerLink a {
@@ -56,4 +69,29 @@ form {
   &:hover {
     color: #4e4e4e;
   }
+}
+
+.errorMessage {
+  color: red;
+}
+
+/* Image styles */
+
+.leftImage,
+.rightImage {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.leftImage {
+  left: 0;
+  margin-left: 7%;
+  width: 25%;
+}
+
+.rightImage {
+  right: 0;
+  margin-right: 9%;
+  width: 23%;
 }
