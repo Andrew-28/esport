@@ -1,6 +1,7 @@
 import React from "react";
 import { SideBar } from "../SideBar";
 import { Map } from "../../components/Map";
+import { Places } from "../../components/Places";
 import style from "./Home.module.css";
 
 const Home = () => {
@@ -10,6 +11,9 @@ const Home = () => {
         <SideBar />
       </div>
       <Map />
+      <div>
+        <Places />
+      </div>
     </div>
   );
 };

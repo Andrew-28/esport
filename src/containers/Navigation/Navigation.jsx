@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, animateScroll } from "react-scroll";
-import { Route, Routes } from "react-router-dom";
 import style from "./Navigation.module.css";
+import { Footer } from "../Footer";
+import { Route, Routes } from "react-router-dom";
 import { Login } from "../Authorization/Login";
 
 const Navigation = () => {
@@ -9,23 +10,21 @@ const Navigation = () => {
     <nav className={style.navigation}>
       <div className={style.title}>єСпорт</div>
       <div className={style.btnGroup}>
-        {/* <Link to={"footer"} className={style.unselected}>
-          Про нас
-        </Link> */}
         <Link
           className={style.btn}
-          // activeClass="active"
           to="footer"
           spy={true}
           smooth={true}
-          // offset={70}
           duration={600}
         >
           Про нас
         </Link>
-        <Link to="/Login" className={style.btn}>
+        <Link to="/login" className={style.btn}>
           Авторизуватися
         </Link>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </div>
     </nav>
   );

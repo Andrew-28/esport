@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   return (
-    <div className={style.container}>
+    <div className={style.container} id="login">
       <h1 className={style.formTitle}>Вход</h1>
       <form onSubmit={handleSubmit}>
         <div className={style.inputGroup}>

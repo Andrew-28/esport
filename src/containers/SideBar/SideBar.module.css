@@ -1,6 +1,6 @@
 .sideBar {
   width: 250px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 60px);
   background-color: rgb(0, 0, 0);
   color: white;
   overflow-y: scroll;

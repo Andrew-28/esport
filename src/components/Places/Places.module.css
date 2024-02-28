@@ -1,0 +1,11 @@
+.text {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  border-color: white;
+}
+
+.text p {
+  padding: 3%;
+  color: white;
+}

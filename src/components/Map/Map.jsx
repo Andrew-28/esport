@@ -1,15 +1,17 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import style from "./Map.module.css";
 
 const Map = () => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyCi3tUbZSYeHIRuqRk1K545Q_M-TWSNKxk",
+    language: "uk",
   });
 
   const containerStyle = {
     width: "800px",
-    height: "685px",
+    height: "695px",
   };
 
   const mapRef = React.useRef(undefined);
@@ -27,10 +29,10 @@ const Map = () => {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{
-            lat: -3.745,
-            lng: -38.523,
+            lat: 48.46718868150143,
+            lng: 35.03321609792512,
           }}
-          zoom={10}
+          zoom={12}
           onLoad={onLoad}
           onUnmount={onUnmount}
         >

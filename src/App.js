@@ -1,25 +1,18 @@
 import "./App.css";
-import { Navigation } from "./containers/Navigation";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { SideBar } from "./containers/SideBar";
-import { Map } from "./components/Map";
-import { Footer } from "./containers/Footer";
-import { Login } from "./containers/Authorization/Login";
+import { Navigation } from "./containers/Navigation";
 import { Home } from "./containers/Home";
+import { Footer } from "./containers/Footer";
+import { Place } from "@mui/icons-material";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Navigation />
-        <Routes>
-          {/* <Link to="/Login" className={style.btn}>
-              Авторизуватися
-            </Link> */}
-          <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-        </Routes>
-      </Router>
+      <Navigation />
+      <div className="contentContainer">
+        <Home />
+      </div>
       <div>
         <Footer id="footer" />
       </div>
