@@ -6,6 +6,16 @@ import { Route, Routes, Link } from "react-router-dom";
 import { Login } from "../Authorization/Login";
 
 const Navigation = () => {
+  
+  const handleAnchorClick = (event, anchorId) => {
+    event.preventDefault();
+
+    const element = document.getElementById(anchorId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav className={style.navigation}>
       <Link to="/" className={style.title}>
@@ -13,11 +23,9 @@ const Navigation = () => {
       </Link>
       <div className={style.btnGroup}>
         <a
+          onClick={(e) => handleAnchorClick(e, "footer")}
           className={style.btn}
           href="#footer"
-          spy={true}
-          smooth={true}
-          duration={600}
         >
           Про нас
         </a>
