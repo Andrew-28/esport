@@ -28,6 +28,8 @@ form {
   padding: 16px;
   text-align: left;
   margin: 0 auto;
+
+  position: relative;
 }
 
 .inputLabel {
@@ -42,9 +44,11 @@ form {
 }
 
 .btnContainer {
+  margin-top: 10px;
+
   display: flex;
   justify-content: center;
-  border: none; 
+  border: none;
 }
 
 .btn {
@@ -73,6 +77,8 @@ form {
 
 .errorMessage {
   color: red;
+  position: absolute;
+  bottom: -20px;
 }
 
 /* Image styles */
