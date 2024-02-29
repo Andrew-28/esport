@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import style from "./Registration.module.css";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
   const [email, setEmail] = useState("");
@@ -35,35 +36,38 @@ const Registration = () => {
     <div className={style.registrationFormContainer}>
       <img
         className={style.leftImage}
-        src="../img/running.jpg"
+        src="../img/soccer.png"
         alt="Левое изображение"
       />
 
       <div className={style.registrationForm}>
-        <h2>Реєстрація</h2>
-        <form>
-          <label>E-mail:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <label>Пароль:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <label>Повторіть пароль:</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-
-          {error && <p className="errorMessage">{error}</p>}
+        <h2 className={style.formTitle}>Реєстрація</h2>
+        <form className={style.formContainer}>
+          <div className={style.inputGroup}>
+            <label>E-mail:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className={style.inputGroup}>
+            <label>Пароль:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className={style.inputGroup}>
+            <label>Повторіть пароль:</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            {error && <p className={style.errorMessage}>{error}</p>}
+          </div>
 
           <button
             className={style.btn}
@@ -74,16 +78,19 @@ const Registration = () => {
           </button>
         </form>
 
-        <button
-          className={style.btn}
+        {/* <div
+          className={style.btnBack}
           onClick={() => console.log("Повернення до форми входу")}
         >
-          Форма входа
-        </button>
+          Форма входу
+        </div> */}
+        <Link to="/login" className={style.btnBack}>
+          Форма входу
+        </Link>
       </div>
       <img
         className={style.rightImage}
-        src="../img/basket-ball.jpg"
+        src="../img/volleyboll.png"
         alt="Правое изображение"
       />
     </div>

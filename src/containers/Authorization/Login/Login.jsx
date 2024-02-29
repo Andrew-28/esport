@@ -40,7 +40,7 @@ const Login = () => {
     <div className={style.container}>
       <img
         className={style.leftImage}
-        src="../img/running.jpg"
+        src="../img/soccer.png"
         alt="Левое изображение"
       />
 
@@ -87,12 +87,12 @@ const Login = () => {
         </form>
       </div>
       <p className={style.registerLink}>
-        <Link to="/registration" >Зареєструватись</Link>
+        <Link to="/registration">Зареєструватись</Link>
       </p>
 
       <img
         className={style.rightImage}
-        src="../img/basket-ball.jpg"
+        src="../img/volleyboll.png"
         alt="Правое изображение"
       />
     </div>
