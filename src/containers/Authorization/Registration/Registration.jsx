@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import style from "./Registration.module.css";
 import { Link } from "react-router-dom";
 

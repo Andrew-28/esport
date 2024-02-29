@@ -1,12 +1,8 @@
 import React from "react";
-import { animateScroll } from "react-scroll";
 import style from "./Navigation.module.css";
-import { Footer } from "../Footer";
-import { Route, Routes, Link } from "react-router-dom";
-import { Login } from "../Authorization/Login";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
-  
   const handleAnchorClick = (event, anchorId) => {
     event.preventDefault();
 

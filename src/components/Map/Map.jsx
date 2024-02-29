@@ -24,7 +24,7 @@ const Map = () => {
     mapRef.current = undefined;
   }, []);
   return (
-    <div width="100%">
+    <div className={style.mapContainer}>
       {isLoaded ? (
         <GoogleMap
           mapContainerStyle={containerStyle}

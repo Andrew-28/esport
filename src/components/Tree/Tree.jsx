@@ -28,15 +28,14 @@ const Tree = ({ individual, team }) => {
     );
   };
 
-  let saveId = 1;
-
   const renderTree = (data, parentId = null) => {
     return data.map((el) => {
       const nodeId = `${parentId}-${el.Name}`;
       return (
-        <TreeItem key={nodeId} nodeId={nodeId} label={el.Name}>
+        <TreeItem id={nodeId} key={nodeId} nodeId={nodeId} label={el.Name}>
           {el.Subspecies.map((sub) => (
             <TreeItem
+              id={`${nodeId}-${sub}`}
               key={`${nodeId}-${sub}`}
               nodeId={`${nodeId}-${sub}`}
               label={sub}
@@ -67,10 +66,10 @@ const Tree = ({ individual, team }) => {
         onNodeSelect={handleSelect}
         multiSelect
       >
-        <TreeItem nodeId="1" label="Індивідуальні">
+        <TreeItem id="1" nodeId="1" label="Індивідуальні">
           {renderTree(individual)}
         </TreeItem>
-        <TreeItem nodeId="18" label="Командні">
+        <TreeItem id="18" nodeId="18" label="Командні">
           {renderTree(team)}
         </TreeItem>
       </TreeView>
