@@ -24,3 +24,25 @@
   height: 600px;
   display: block;
 }
+
+/* :root {
+  .css-yjsfm1 {
+    color: white;
+  }
+  .css-yjsfm1 > span {
+    color: white;
+  }
+
+  .MuiTextField-root {
+    color: white;
+  }
+
+  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+    color: rgb(255, 255, 255);
+  }
+
+  .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon.css-fii3ml-MuiAutocomplete-root
+    .MuiOutlinedInput-root {
+    color: rgb(255, 255, 255);
+  }
+} */
