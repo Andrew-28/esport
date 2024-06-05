@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Ваша логика отправки данных на сервер
+      // логика отправки данных на сервер
       console.log("Email:", email);
       console.log("Password:", password);
     } else {
@@ -99,5 +99,3 @@ const Login = () => {
 };
 
 export default Login;
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<Login id="Login" />, rootElement);

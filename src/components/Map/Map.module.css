@@ -3,4 +3,5 @@
 }
 .mapContainer {
   border: 3px solid rgb(83, 57, 202);
+  width: 100%;
 }
