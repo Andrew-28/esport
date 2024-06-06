@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+import { PlaceCard } from "../../containers/PlaceCard";
 import style from "./Map.module.css";
-import placesData from "../../data/places.json"; // Імпортуйте JSON файл з даними про місця
+import markersJson from "../../data/markers.json"; // Імпортуйте JSON файл з даними про місця
 
-const Map = () => {
+const Map = ({ onDataRecieve, selectedMarkers }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyCOHvFqK3NFtGfKv_KM3lJKdop8YzJkLXs",
@@ -25,17 +26,20 @@ const Map = () => {
     mapRef.current = undefined;
   }, []);
 
-  const [places, setPlaces] = useState([]);
-
-  const showPlaceCard = (id) => {
-    // console.log(places.find((place) => (place.id = id)));
-    console.log(id);
-  };
+  const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
+    if (selectedMarkers) {
+      setMarkers(selectedMarkers);
+    } else {
+      setMarkers(markersJson);
+    }
     // Завантажуємо дані про місця з JSON файлу
-    setPlaces(placesData);
-  }, []);
+  }, [selectedMarkers]);
+
+  const handleMarkerClick = (placeId) => {
+    onDataRecieve(placeId);
+  };
 
   return (
     <div className={style.mapContainer}>
@@ -50,12 +54,12 @@ const Map = () => {
           onLoad={onLoad}
           onUnmount={onUnmount}
         >
-          {places.map((place, index) => (
+          {markers.map((place, index) => (
             <MarkerF
               key={index}
               position={{ lat: place.lat, lng: place.lng }}
               title={place.title}
-              onClick={showPlaceCard(place.id)}
+              onClick={() => handleMarkerClick(place.placeId)} // Змінено тут
             />
           ))}
         </GoogleMap>

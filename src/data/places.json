@@ -1,20 +1,12 @@
 [
   {
-    "lat": 48.46718868150143,
-    "lng": 35.03321609792512,
-    "title": "Place 1",
-    "id": 1
-  },
-  {
-    "lat": 48.48718868150143,
-    "lng": 35.04321609792512,
-    "title": "Place 2",
-    "id": 2
-  },
-  {
-    "lat": 48.45718868150143,
-    "lng": 35.02321609792512,
-    "title": "Place 3",
-    "id": 3
+    "id": 1,
+    "photos": [
+      "https://lh5.googleusercontent.com/p/AF1QipPNXaHP8cvyAZFE9TsCuY8uDuaNqUlDO1GQ8soQ=w408-h544-k-no",
+      "https://lh5.googleusercontent.com/p/AF1QipO611kpYCHbpU3VroGjx3_D3YY8Titl04GsAyrw=w426-h240-k-no"
+    ],
+    "name": "sdf",
+    "description": "sfhvbscnsjdncknj",
+    "rating": 4
   }
 ]
