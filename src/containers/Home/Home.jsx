@@ -40,13 +40,9 @@ const Home = () => {
       >
         <Map onDataRecieve={handlePlace} selectedMarkers={selectedMarkers} />
       </div>
-      <div
-        className={`${style["place-card-container"]} ${
-          place ? style["visible"] : ""
-        }`}
-      >
+
         {place && <PlaceCard place={place} />}
-      </div>
+
     </div>
   );
 };

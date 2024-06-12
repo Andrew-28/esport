@@ -40,7 +40,7 @@ const AutocompleteCP = ({ data }) => {
       sx={{ width: 250 }}
       renderInput={(params) => (
         <TextField
-          inputRef={(input) => input && input.focus()}
+          // inputRef={(input) => input && input.focus()} ИЗБАВЛЯЕМСЯ ОТ ЭТОГО
           {...params}
           label="Знайти вид спорту"
           margin="dense"

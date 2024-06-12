@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import style from "./Login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../Navigation/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const validateForm = () => {
     const newErrors = {};
@@ -23,13 +27,34 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // логика отправки данных на сервер
-      console.log("Email:", email);
-      console.log("Password:", password);
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Вхід успішний:", data);
+          localStorage.setItem('token', data.token); // Сохранение токена в локальном хранилище
+          login();
+          navigate("/"); // Перенаправление на главную страницу
+        } else {
+          setServerError(data.msg || "Помилка входу");
+          console.error("Помилка входу:", data);
+        }
+      } catch (error) {
+        setServerError("Помилка сервера");
+        console.error("Помилка сервера:", error);
+      }
     } else {
       console.log("У формі є помилки. Не вдалося відправити");
     }
@@ -78,6 +103,7 @@ const Login = () => {
               <p className={style.errorMessage}>{errors.password}</p>
             )}
           </div>
+          {serverError && <p className={style.errorMessage}>{serverError}</p>}
           <div className={style.btnContainer}>
             <button className={style.btn} type="submit">
               Війти

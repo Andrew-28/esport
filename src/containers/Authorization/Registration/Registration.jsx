@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import style from "./Registration.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const isEmailValid = () => {
     return email.includes("@");
   };
 
   const isPasswordValid = () => {
-    return password.length >= 8;
+    return password.length >= 4;
   };
 
-  const handleRegistration = () => {
-    if (!email || !password || !confirmPassword) {
+  const handleRegistration = async () => {
+    if (!name || !email || !password || !confirmPassword) {
       setError("Будь ласка, заповніть усі поля");
     } else if (!isEmailValid()) {
       setError("Будь ласка, введіть правильну адресу електронної пошти");
@@ -27,7 +30,27 @@ const Registration = () => {
       setError("Паролі не співпадають");
     } else {
       setError("");
-      console.log("Реєстрація:", { email, password });
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setSuccess("Реєстрація успішна");
+          console.log("Реєстрація успішна:", data);
+          navigate("/"); // Перенаправление на главную страницу
+        } else {
+          setError(data.msg || "Помилка реєстрації");
+          console.error("Помилка реєстрації:", data);
+        }
+      } catch (error) {
+        setError("Помилка сервера");
+        console.error("Помилка сервера:", error);
+      }
     }
   };
 
@@ -42,6 +65,14 @@ const Registration = () => {
       <div className={style.registrationForm}>
         <h2 className={style.formTitle}>Реєстрація</h2>
         <form className={style.formContainer}>
+          <div className={style.inputGroup}>
+            <label>Ім'я:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
           <div className={style.inputGroup}>
             <label>E-mail:</label>
             <input
@@ -66,6 +97,7 @@ const Registration = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             {error && <p className={style.errorMessage}>{error}</p>}
+            {success && <p className={style.successMessage}>{success}</p>}
           </div>
 
           <button
@@ -77,12 +109,6 @@ const Registration = () => {
           </button>
         </form>
 
-        {/* <div
-          className={style.btnBack}
-          onClick={() => console.log("Повернення до форми входу")}
-        >
-          Форма входу
-        </div> */}
         <Link to="/login" className={style.btnBack}>
           Форма входу
         </Link>
