@@ -31,7 +31,7 @@ const Login = () => {
       console.log("Email:", email);
       console.log("Password:", password);
     } else {
-      console.log("Форма содержит ошибки. Не удалось отправить.");
+      console.log("У формі є помилки. Не вдалося відправити");
     }
   };
 

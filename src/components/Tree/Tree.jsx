@@ -32,13 +32,27 @@ const Tree = ({ onDataRecieve }) => {
   };
 
   const handleExpandClick = () => {
-    setExpanded((oldExpanded) =>
-      oldExpanded.length === 0
-        ? Object.keys(data).flatMap((key) =>
-            data[key].flatMap((item) => item.Name)
-          )
-        : []
-    );
+    setExpanded((oldExpanded) => {
+      if (oldExpanded.length === 0) {
+        // Collect all nodeIds to expand
+        const allNodeIds = [];
+        Object.keys(data).forEach((key) => {
+          allNodeIds.push(key);
+          data[key].forEach((item) => {
+            const nodeId = `${key}-${item.Name}`;
+            allNodeIds.push(nodeId);
+            if (item.Subspecies.length > 0) {
+              item.Subspecies.forEach((sub) => {
+                allNodeIds.push(`${nodeId}-${sub}`);
+              });
+            }
+          });
+        });
+        return allNodeIds;
+      } else {
+        return [];
+      }
+    });
   };
 
   const getNodeNameById = (data, nodeId) => {
@@ -48,6 +62,9 @@ const Tree = ({ onDataRecieve }) => {
           if (`${key}-${el.Name}-${sub}` === nodeId) {
             return sub;
           }
+        }
+        if (`${key}-${el.Name}` === nodeId && el.Subspecies.length === 0) {
+          return el.Name;
         }
       }
     }
@@ -61,14 +78,16 @@ const Tree = ({ onDataRecieve }) => {
           const nodeId = `${key}-${el.Name}`;
           return (
             <TreeItem id={nodeId} key={nodeId} nodeId={nodeId} label={el.Name}>
-              {el.Subspecies.map((sub) => (
-                <TreeItem
-                  id={`${nodeId}-${sub}`}
-                  key={`${nodeId}-${sub}`}
-                  nodeId={`${nodeId}-${sub}`}
-                  label={sub}
-                />
-              ))}
+              {el.Subspecies.length > 0
+                ? el.Subspecies.map((sub) => (
+                    <TreeItem
+                      id={`${nodeId}-${sub}`}
+                      key={`${nodeId}-${sub}`}
+                      nodeId={`${nodeId}-${sub}`}
+                      label={sub}
+                    />
+                  ))
+                : null}
             </TreeItem>
           );
         })}

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./Autocomplete.css";
-
 
 function transformData(data) {
   const transformedData = [];
@@ -21,7 +20,17 @@ function transformData(data) {
 }
 
 const AutocompleteCP = ({ data }) => {
+  const [isFocused, setIsFocused] = useState(true);
   const arr = transformData(data);
+
+  useEffect(() => {
+    // Фокусування при завантаженні компонента
+    const timer = setTimeout(() => {
+      setIsFocused(false);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Autocomplete
       className="autocomplete"
@@ -31,13 +40,17 @@ const AutocompleteCP = ({ data }) => {
       sx={{ width: 250 }}
       renderInput={(params) => (
         <TextField
+          inputRef={(input) => input && input.focus()}
           {...params}
-          // hiddenLabel
-          label="Обрати вид спорту"
+          label="Знайти вид спорту"
           margin="dense"
           variant="outlined"
           sx={{ color: "white" }}
-          InputLabelProps={{ className: "textfieldLabel" }}
+          InputLabelProps={{
+            className: `textfieldLabel`,
+          }}
+          // onFocus={() => setIsFocused(true)}
+          // onBlur={() => setIsFocused(false)}
         />
       )}
     />

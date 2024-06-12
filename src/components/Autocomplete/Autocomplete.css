@@ -5,3 +5,23 @@
 #combo-box-demo {
   color: white !important;
 }
+
+.autocomplete {
+  padding: 5px;
+}
+
+.autocomplete .MuiInputBase-input {
+  color: white !important;
+}
+
+.autocomplete .MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}
+
+.autocomplete .MuiSvgIcon-root {
+  display: none; /* Прибираємо трикутник */
+}
+
+.autocomplete .MuiInputBase-input::placeholder {
+  color: #b0b0b0 !important; /* Темніший placeholder */
+}

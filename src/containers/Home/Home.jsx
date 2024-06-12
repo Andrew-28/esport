@@ -7,15 +7,13 @@ import placesJson from "../../data/places.json";
 
 const Home = () => {
   const [places, setPlaces] = useState(null);
+  const [place, setPlace] = useState(null);
+  const [selectedMarkers, setSelectedMarkers] = useState([]);
 
   useEffect(() => {
     // Завантажуємо дані про місця з JSON файлу
     setPlaces(placesJson);
   }, []);
-
-  const [place, setPlace] = useState(null);
-
-  const [selectedMarkers, setSelectedMarkers] = useState([]);
 
   const handlePlace = (placeId) => {
     const place = places.find((pl) => pl.id === placeId);
@@ -32,17 +30,23 @@ const Home = () => {
 
   return (
     <div className={style.contentContainer}>
-      <div>
+      <div className={style.sidebar}>
         <SideBar selectMarkers={handleMarkers} />
       </div>
-      <Map onDataRecieve={handlePlace} selectedMarkers={selectedMarkers} />
-      {place ? (
-        <div>
-          <PlaceCard place={place} />
-        </div>
-      ) : (
-        <></>
-      )}
+      <div
+        className={`${style["map-container"]} ${
+          place ? style["map-collapsed"] : ""
+        }`}
+      >
+        <Map onDataRecieve={handlePlace} selectedMarkers={selectedMarkers} />
+      </div>
+      <div
+        className={`${style["place-card-container"]} ${
+          place ? style["visible"] : ""
+        }`}
+      >
+        {place && <PlaceCard place={place} />}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,42 @@
 .contentContainer {
+  display: grid;
+  grid-template-columns: 1fr repeat(4, 1fr); /* 1 колонка для SideBar, 4 колонки для Map і PlaceCard */
+  gap: 0;
+  height: 100vh;
+}
+
+.sidebar {
+  grid-column: 1 / 2;
+  background-color: #000; /* Можна додати, щоб було видно кордони контейнера */
+}
+
+.map-container {
+  grid-column: 2 / span 4; /* Займає 2-5 колонки спочатку */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff; /* Можна додати, щоб було видно кордони контейнера */
+}
+
+.map-container.map-collapsed {
+  grid-column: 2 / span 3; /* Займає 2-4 колонки при відображенні PlaceCard */
+}
+
+.map {
+  flex: 1;
+  height: 100%; /* Забезпечити, щоб карта займала всю висоту контейнера */
+  width: 100%; /* Забезпечити, щоб карта займала всю ширину контейнера */
+}
+
+.place-card-container {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #fff; /* Можна додати, щоб було видно кордони контейнера */
+}
+
+.place-card-container.visible {
+  display: flex;
+  grid-column: 5 / 6; /* Займає 5 колонку при відображенні */
 }
