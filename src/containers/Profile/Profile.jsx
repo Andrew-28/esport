@@ -27,6 +27,8 @@ const Profile = () => {
     }
   }, [isLoading, isAuthenticated]);
 
+  const url = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchProfile = async () => {
       if (!isAuthenticated) {
@@ -36,7 +38,7 @@ const Profile = () => {
 
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/profile/me", {
+        const res = await fetch(`${url}/api/profile/me`, {
           headers: {
             "Content-Type": "application/json",
             "x-auth-token": token,
@@ -87,7 +89,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/profile/me", {
+      const res = await fetch(`${url}/api/profile/me`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -341,8 +343,8 @@ const Profile = () => {
                 <button
                   type="button"
                   className={`toggle-switch ${editForm.emailOnSuggestionStatus
-                      ? "toggle-on"
-                      : "toggle-off"
+                    ? "toggle-on"
+                    : "toggle-off"
                     }`}
                   onClick={() =>
                     setEditForm((prev) => ({

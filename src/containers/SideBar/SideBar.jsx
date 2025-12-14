@@ -7,10 +7,12 @@ const SideBar = ({ onSportSelect }) => {
   const [sportsTreeData, setSportsTreeData] = useState(null);
   const [allSports, setAllSports] = useState([]);
 
+  const url = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchSports = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/sports");
+        const res = await fetch(`${url}/api/sports`);
         if (!res.ok) {
           throw new Error("Помилка завантаження видів спорту");
         }
