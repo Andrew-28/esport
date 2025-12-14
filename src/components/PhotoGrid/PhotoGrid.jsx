@@ -1,3 +1,4 @@
+// src/components/PhotoGrid/PhotoGrid.jsx
 import React, { useState } from "react";
 import Modal from "react-modal";
 import "./PhotoGrid.css";
@@ -7,6 +8,12 @@ Modal.setAppElement("#root");
 const PhotoGrid = ({ photos }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(null);
+
+  const safePhotos = Array.isArray(photos) ? photos.filter(Boolean) : [];
+
+  if (safePhotos.length === 0) {
+    return null; // або можна показати плейсхолдер
+  }
 
   const openModal = (photo) => {
     setCurrentPhoto(photo);
@@ -20,11 +27,13 @@ const PhotoGrid = ({ photos }) => {
 
   return (
     <div className="photo-grid">
-      <div className="main-photo" onClick={() => openModal(photos[0])}>
-        <img src={photos[0]} alt="main" />
-      </div>
+      {safePhotos[0] && (
+        <div className="main-photo" onClick={() => openModal(safePhotos[0])}>
+          <img src={safePhotos[0]} alt="main" />
+        </div>
+      )}
       <div className="sub-photos">
-        {photos.slice(1).map((photo, index) => (
+        {safePhotos.slice(1).map((photo, index) => (
           <div
             key={index}
             className="sub-photo"

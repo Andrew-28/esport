@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import style from "./Registration.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../Navigation/AuthContext";
+import { API_BASE_URL } from "../../../config/apiConfig";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -10,16 +12,15 @@ const Registration = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const isEmailValid = () => {
-    return email.includes("@");
-  };
-
-  const isPasswordValid = () => {
-    return password.length >= 4;
-  };
+  const isEmailValid = () => email.includes("@");
+  const isPasswordValid = () => password.length >= 8;
 
   const handleRegistration = async () => {
+    setError("");
+    setSuccess("");
+
     if (!name || !email || !password || !confirmPassword) {
       setError("Будь ласка, заповніть усі поля");
     } else if (!isEmailValid()) {
@@ -29,27 +30,36 @@ const Registration = () => {
     } else if (password !== confirmPassword) {
       setError("Паролі не співпадають");
     } else {
-      setError("");
       try {
-        const response = await fetch("http://localhost:5000/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, password }),
-        });
+        const response = await fetch(
+          `${API_BASE_URL}/api/auth/register`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, email, password }),
+          }
+        );
+
         const data = await response.json();
+
         if (response.ok) {
           setSuccess("Реєстрація успішна");
-          console.log("Реєстрація успішна:", data);
-          navigate("/"); // Перенаправление на главную страницу
+          login(data.token, data.user);
+          navigate("/");
         } else {
-          setError(data.msg || "Помилка реєстрації");
-          console.error("Помилка реєстрації:", data);
+          if (data.msg) {
+            setError(data.msg);
+          } else if (data.errors && data.errors.length > 0) {
+            setError(data.errors[0].msg);
+          } else {
+            setError("Помилка реєстрації");
+          }
         }
       } catch (error) {
-        setError("Помилка сервера");
         console.error("Помилка сервера:", error);
+        setError("Помилка сервера");
       }
     }
   };
@@ -59,20 +69,21 @@ const Registration = () => {
       <img
         className={style.leftImage}
         src="../img/soccer.png"
-        alt="Левое изображение"
+        alt="Ліве зображення"
       />
 
       <div className={style.registrationForm}>
         <h2 className={style.formTitle}>Реєстрація</h2>
         <form className={style.formContainer}>
           <div className={style.inputGroup}>
-            <label>Ім'я:</label>
+            <label>Ім&apos;я:</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
+
           <div className={style.inputGroup}>
             <label>E-mail:</label>
             <input
@@ -81,6 +92,7 @@ const Registration = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
           <div className={style.inputGroup}>
             <label>Пароль:</label>
             <input
@@ -89,6 +101,7 @@ const Registration = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+
           <div className={style.inputGroup}>
             <label>Повторіть пароль:</label>
             <input
@@ -113,10 +126,11 @@ const Registration = () => {
           Форма входу
         </Link>
       </div>
+
       <img
         className={style.rightImage}
         src="../img/volleyboll.png"
-        alt="Правое изображение"
+        alt="Праве зображення"
       />
     </div>
   );

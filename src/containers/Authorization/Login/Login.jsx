@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Navigation/AuthContext";
+import { API_BASE_URL } from "../../../config/apiConfig";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,50 +14,51 @@ const Login = () => {
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!email.trim()) {
       newErrors.email = "Введіть e-mail";
     }
-
     if (!password.trim()) {
       newErrors.password = "Введіть пароль";
     }
-
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setServerError("");
 
-    if (validateForm()) {
-      try {
-        const response = await fetch("http://localhost:5000/api/auth/login", {
+    if (!validateForm()) return;
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/auth/login`,
+        {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          console.log("Вхід успішний:", data);
-          localStorage.setItem('token', data.token); // Сохранение токена в локальном хранилище
-          login();
-          navigate("/"); // Перенаправление на главную страницу
-        } else {
-          setServerError(data.msg || "Помилка входу");
-          console.error("Помилка входу:", data);
         }
-      } catch (error) {
-        setServerError("Помилка сервера");
-        console.error("Помилка сервера:", error);
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        login(data.token, data.user);
+        navigate("/");
+      } else {
+        if (data.msg) {
+          setServerError(data.msg);
+        } else if (data.errors && data.errors.length > 0) {
+          setServerError(data.errors[0].msg);
+        } else {
+          setServerError("Помилка входу");
+        }
       }
-    } else {
-      console.log("У формі є помилки. Не вдалося відправити");
+    } catch (error) {
+      console.error("Помилка сервера:", error);
+      setServerError("Помилка сервера");
     }
   };
 
@@ -65,11 +67,12 @@ const Login = () => {
       <img
         className={style.leftImage}
         src="../img/soccer.png"
-        alt="Левое изображение"
+        alt="Ліве зображення"
       />
 
-      <h1 className={style.formTitle}>Вхід</h1>
+
       <div className={style.loginForm}>
+        <h1 className={style.formTitle}>Вхід</h1>
         <form onSubmit={handleSubmit}>
           <div className={style.inputGroup}>
             <label className={style.inputLabel} htmlFor="email">
@@ -87,6 +90,7 @@ const Login = () => {
               <p className={style.errorMessage}>{errors.email}</p>
             )}
           </div>
+
           <div className={style.inputGroup}>
             <label className={style.inputLabel} htmlFor="password">
               Пароль
@@ -103,22 +107,28 @@ const Login = () => {
               <p className={style.errorMessage}>{errors.password}</p>
             )}
           </div>
-          {serverError && <p className={style.errorMessage}>{serverError}</p>}
+
+          {serverError && (
+            <p className={style.errorMessage}>{serverError}</p>
+          )}
+
           <div className={style.btnContainer}>
             <button className={style.btn} type="submit">
               Війти
             </button>
           </div>
         </form>
+        <p className={style.registerLink}>
+          <Link to="/registration">Зареєструватись</Link>
+        </p>
       </div>
-      <p className={style.registerLink}>
-        <Link to="/registration">Зареєструватись</Link>
-      </p>
+
+
 
       <img
         className={style.rightImage}
         src="../img/volleyboll.png"
-        alt="Правое изображение"
+        alt="Праве зображення"
       />
     </div>
   );

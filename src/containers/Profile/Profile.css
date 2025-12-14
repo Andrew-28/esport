@@ -1,0 +1,563 @@
+.profile-container {
+  max-width: 1040px;
+  margin: 1.8rem auto 2.4rem;
+  padding: 0 1rem 1.5rem;
+  color: var(--text-primary);
+}
+
+.profile-title {
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+}
+
+/* СЕКЦІЇ */
+
+.profile-section {
+  margin-bottom: 1.2rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, var(--accent-soft-2), transparent),
+    var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.profile-section-header {
+  margin-bottom: 0.8rem;
+}
+
+.profile-section-header h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.profile-section-header p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ОСНОВНА ІНФОРМАЦІЯ */
+
+.profile-main-block {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  border: 2px solid rgba(56, 189, 248, 0.5);
+  background: radial-gradient(circle at 0 0, #38bdf8, #a855ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.profile-info p {
+  margin: 0.15rem 0;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* РЕДАГУВАННЯ ПРОФІЛЮ */
+
+.profile-edit-btn {
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(56, 189, 248, 0.2),
+      rgba(168, 85, 247, 0.2)
+    );
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.profile-edit-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(248, 250, 252, 0.9);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
+}
+
+.profile-edit-form {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Щоб не лізти в інші форми — всі form-row під профілем */
+.profile-edit-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile-edit-form .form-row label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.profile-edit-form .form-row input {
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.profile-edit-form .form-row input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+/* інлайн-рядок у формі для налаштувань */
+
+.form-row-inline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.form-row-label {
+  flex: 1;
+}
+
+.form-row-hint {
+  margin: 0.1rem 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* КНОПКА ЗБЕРЕЖЕННЯ */
+
+.btn-submit {
+  align-self: flex-start;
+  margin-top: 0.2rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0f172a;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.95);
+}
+
+/* ПОВІДОМЛЕННЯ */
+
+.message {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.message.error {
+  color: #fecaca;
+}
+
+.message.success {
+  color: #bbf7d0;
+}
+
+/* СТАТИСТИКА */
+
+.profile-stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 0 0 135px;
+  padding: 0.65rem 0.75rem;
+  border-radius: 14px;
+  background: var(--surface-card-soft);
+  border: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ТАБЛИЦЯ (якщо буде потрібна) */
+
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.profile-table th,
+.profile-table td {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+}
+
+.profile-table th {
+  color: var(--text-primary);
+}
+
+.profile-empty {
+  margin: 0.3rem 0 0.1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.profile-muted {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* СТАТУСИ */
+
+.status {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  text-transform: lowercase;
+}
+
+.status-pending {
+  background: rgba(252, 211, 77, 0.15);
+  color: #facc15;
+}
+
+.status-approved {
+  background: rgba(34, 197, 94, 0.14);
+  color: #4ade80;
+}
+
+.status-rejected {
+  background: rgba(248, 113, 113, 0.18);
+  color: #fca5a5;
+}
+
+/* ОБРАНІ МІСЦЯ */
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+}
+
+.favorite-card {
+  position: relative;
+  padding: 0.7rem 0.8rem 0.85rem;
+  border-radius: 15px;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent),
+    var(--surface-card-soft);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.favorite-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favorite-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--chip-bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+.favorite-title {
+  margin: 0.15rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.favorite-meta {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.favorite-open-btn {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0f172a;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.15s ease;
+}
+
+.favorite-open-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.95);
+}
+
+/* ТУМБЛЕР НАЛАШТУВАНЬ */
+
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.toggle-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.toggle-switch {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: var(--chip-bg);
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.toggle-switch .toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #e5f3ff;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.9);
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.toggle-switch.toggle-on {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: rgba(148, 163, 184, 0.9);
+}
+
+.toggle-switch.toggle-on .toggle-knob {
+  transform: translateX(18px);
+  background: #0b1120;
+}
+
+.toggle-switch.toggle-off .toggle-knob {
+  transform: translateX(0);
+}
+
+/* ACTIVITY FEED */
+
+.activity-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: var(--surface-card-soft);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  align-items: flex-start;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease,
+    background 0.18s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+  border-color: rgba(248, 250, 252, 0.6);
+}
+
+.activity-icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  background: radial-gradient(circle at top left, var(--accent-soft), transparent);
+  border: 1px solid var(--border-subtle);
+}
+
+.activity-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.activity-chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.chip-review {
+  background: rgba(234, 179, 8, 0.18);
+  color: #fab920;
+}
+
+.chip-comment {
+  background: rgba(59, 130, 246, 0.22);
+  color: #9dc7fb;
+}
+
+.chip-suggestion {
+  background: rgba(168, 85, 247, 0.25);
+  color: #9061c3;
+}
+
+.chip-favorite {
+  background: rgba(244, 63, 94, 0.2);
+  color: #fb8383;
+}
+
+.activity-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.activity-text {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+
+.activity-comment-text {
+  opacity: 0.9;
+}
+
+.activity-sport {
+  color: var(--text-muted);
+}
+
+.activity-status {
+  margin-left: 4px;
+  font-size: 0.8rem;
+}
+
+.activity-status.status-pending {
+  color: #facc15;
+}
+
+.activity-status.status-approved {
+  color: #4ade80;
+}
+
+.activity-status.status-rejected {
+  color: #fca5a5;
+}
+
+/* АДАПТИВ */
+
+@media (max-width: 720px) {
+  .profile-main-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

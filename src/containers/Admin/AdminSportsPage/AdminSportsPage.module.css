@@ -1,0 +1,395 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pageSubtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 720px;
+}
+
+/* === Layout: ліва колонка (список), права (форма) === */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Ліва частина === */
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.searchBlock {
+  background: var(--surface-glass);
+  border-radius: 999px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.45);
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  padding: 0.45rem 0.6rem;
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+/* Фільтри категорій */
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.filterChip {
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.15s ease;
+}
+
+.filterChip:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.55);
+}
+
+.filterChipActive {
+  background: var(--chip-bg-active);
+  border-color: transparent;
+  color: #f9fafb;
+  box-shadow: 0 10px 24px rgba(56, 189, 248, 0.35);
+}
+
+/* Список видів спорту */
+
+.listCard {
+  background: var(--surface-card-soft);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  padding: 0.6rem;
+  max-height: calc(100vh - 220px);
+  overflow: auto;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  padding: 0.55rem 0.6rem;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border: 1px solid transparent;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.15s ease;
+}
+
+.listItem + .listItem {
+  margin-top: 0.25rem;
+}
+
+.listItem:hover {
+  /* background: rgba(15, 23, 42, 0.7); */
+  border-color: rgba(148, 163, 184, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.75);
+}
+
+.listItemActive {
+  background: radial-gradient(circle at top left, #38bdf8 0, #0f172a 60%);
+  border-color: rgba(56, 189, 248, 0.9);
+  box-shadow: 0 14px 30px rgba(56, 189, 248, 0.45);
+}
+
+.listTitleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.listTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.listCategory {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  /* background: rgba(15, 23, 42, 0.9); */
+  color: var(--text-soft);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.listSubspecies {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  opacity: 0.95;
+}
+
+/* Стани / повідомлення */
+
+.muted {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.5rem 0.25rem;
+}
+
+.error {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #fecaca;
+}
+
+.success {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #bbf7d0;
+}
+
+/* === Права частина (форма) === */
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.detailsHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.detailsTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.detailsSubtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.card {
+  background: var(--surface-glass);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Формові ряди */
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.formRow label {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.formRow input,
+.formRow select,
+.formRow textarea {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+  outline: none;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.15s ease,
+    background 0.18s ease;
+}
+
+[data-theme="light"] .formRow input,
+[data-theme="light"] .formRow select,
+[data-theme="light"] .formRow textarea {
+  background: rgba(248, 250, 252, 0.95);
+}
+
+.formRow input:focus,
+.formRow select:focus,
+.formRow textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+}
+
+.formRow textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Підказка під textarea */
+
+.hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Кнопки */
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.primaryButton,
+.secondaryButton,
+.dangerButton {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+}
+
+/* primary — з акцентним градієнтом */
+
+.primaryButton {
+  background: linear-gradient(135deg, #38bdf8, #a855ff);
+  color: #f9fafb;
+  box-shadow: 0 12px 26px rgba(56, 189, 248, 0.45);
+}
+
+.primaryButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(56, 189, 248, 0.65);
+}
+
+/* secondary — скляна кнопка */
+
+.secondaryButton {
+  align-self: flex-start;
+  margin-top: 0.2rem;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0f172a;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  border-radius: 24px;
+  width: 50%;
+}
+
+.secondaryButton:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.8);
+}
+
+/* danger — червона */
+
+.dangerButton {
+  background: rgba(127, 29, 29, 0.9);
+  color: #fee2e2;
+  border-color: rgba(248, 113, 113, 0.8);
+}
+
+.dangerButton:hover {
+  background: rgba(185, 28, 28, 0.95);
+  border-color: rgba(252, 165, 165, 0.9);
+  box-shadow: 0 10px 26px rgba(185, 28, 28, 0.7);
+  transform: translateY(-1px);
+}
+
+/* Disabled */
+
+.primaryButton:disabled,
+.secondaryButton:disabled,
+.dangerButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}

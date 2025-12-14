@@ -1,0 +1,344 @@
+/* Весь екран: ліва колонка форма (~30%), права колонка мапа (~70%) */
+.suggest-page {
+  padding: 32px 20px;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.33fr) minmax(0, 0.67fr);
+  gap: 20px;
+  min-height: calc(100vh - 120px);
+  /* щоб мапа була високою */
+}
+
+/* На вузьких екранах — в одну колонку */
+@media (max-width: 960px) {
+  .suggest-page {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+}
+
+/* Ліва колонка (форма) */
+.suggest-left {
+  align-self: flex-start;
+  padding: 16px 18px 20px;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--bg-elevated-soft);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.suggest-title {
+  margin: 0 0 6px;
+  font-size: 1.8rem;
+
+  color: var(--text-primary);
+}
+
+.suggest-subtitle {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Права колонка (мапа) */
+.suggest-right {
+  min-height: calc(100vh - 140px);
+  display: flex;
+}
+
+@media (max-width: 960px) {
+  .suggest-right {
+    min-height: 360px;
+  }
+}
+
+.suggest-map-panel {
+  flex: 1;
+  padding: 12px 14px 16px;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top right, var(--accent-soft-2), transparent),
+    var(--bg-elevated-soft);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.suggest-map-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.suggest-map-hint {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* координати над мапою */
+.coords-row {
+  display: flex;
+  gap: 18px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.coords-row>div {
+  display: flex;
+  flex-direction: column;
+}
+
+.coords-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+}
+
+.coords-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+/* Мапа – максимальний розмір по висоті колонки */
+.suggest-map-wrapper {
+  margin-top: 6px;
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.suggest-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== ФОРМА ===== */
+
+.suggest-place-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row,
+.form-row-inline>div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-row-inline {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row-inline>div {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .form-row-inline {
+    flex-direction: column;
+  }
+}
+
+.suggest-place-form label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* однаковий стиль для інпутів / textarea */
+.suggest-place-form input,
+.suggest-place-form textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  padding: 8px 10px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.suggest-place-form textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.suggest-place-form input::placeholder,
+.suggest-place-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.suggest-place-form input:focus,
+.suggest-place-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+/* Кнопка */
+.btn-submit {
+  align-self: flex-end;
+  margin-top: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.16s ease,
+    opacity 0.16s ease;
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* повідомлення */
+.message {
+  margin: 4px 0 8px;
+  font-size: 0.86rem;
+}
+
+.message.error {
+  color: #f97373;
+}
+
+.message.success {
+  color: #4ade80;
+}
+
+/* трохи компактніше на мобілці */
+@media (max-width: 640px) {
+  .suggest-left {
+    padding: 14px 14px 18px;
+    border-radius: 20px;
+  }
+
+  .suggest-map-panel {
+    border-radius: 20px;
+  }
+}
+
+/* ===== підказки по виду спорту / чіпи ===== */
+
+.field-hint {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.field-hint-error {
+  color: #fecaca;
+}
+
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.chip {
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--chip-bg);
+  color: var(--text-soft);
+  padding: 0.25rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease,
+    transform 0.08s ease;
+}
+
+.chip-sm {
+  font-size: 0.8rem;
+}
+
+.chip-xs {
+  font-size: 0.78rem;
+  padding-inline: 0.6rem;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.chip-active {
+  background: var(--chip-bg-active);
+  color: var(--chip-text);
+  border-color: transparent;
+}
+
+.selected-sport-row {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.selected-sport-label {
+  color: var(--text-muted);
+  margin-right: 0.25rem;
+}
+
+.selected-sport-value {
+  font-weight: 500;
+}
+
+/* ===== превʼю картка ===== */
+
+.suggest-preview-card {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-xl);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  font-size: 0.9rem;
+}
+
+.suggest-preview-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.suggest-preview-card p {
+  margin: 0.15rem 0;
+  color: var(--text-muted);
+}
+
+/* старий контейнер, якщо десь ще використовується — залишаємо, але спрощуємо */
+.suggest-place-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 1.5rem;
+  max-width: 1280px;
+  margin: 1.5rem auto 2rem;
+  padding: 1.2rem 1.4rem 1.6rem;
+  border-radius: var(--radius-xl);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}

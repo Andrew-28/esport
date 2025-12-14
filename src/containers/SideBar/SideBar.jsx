@@ -1,40 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SideBar.module.css";
 import { Tree } from "../../components/Tree";
 import { AutocompleteCP } from "../../components/Autocomplete";
-import markersJson from "../../data/markers.json";
 
-const jsonData = require("../../data/sports.data.json");
-
-const individualSports = jsonData["Kinds of sports"].Індивідуальні;
-const teamSport = jsonData["Kinds of sports"].Командні;
-
-const allSports = individualSports.concat(teamSport);
-
-const SideBar = ({ selectMarkers }) => {
-  const [markers, setMarkers] = useState([]);
+const SideBar = ({ onSportSelect }) => {
+  const [sportsTreeData, setSportsTreeData] = useState(null);
+  const [allSports, setAllSports] = useState([]);
 
   useEffect(() => {
-    // Завантажуємо дані про місця з JSON файлу
-    setMarkers(markersJson);
+    const fetchSports = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/sports");
+        if (!res.ok) {
+          throw new Error("Помилка завантаження видів спорту");
+        }
+        const data = await res.json();
+        const kinds = data["Kinds of sports"] || {};
+
+        setSportsTreeData(kinds);
+
+        const individual = kinds["Індивідуальні"] || [];
+        const team = kinds["Командні"] || [];
+        setAllSports(individual.concat(team));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchSports();
   }, []);
 
   const handleSport = (sportName) => {
-    const marker = markers.filter((m) => m.sportName === sportName);
-    if (marker) {
-      selectMarkers(marker);
-    } else {
-      selectMarkers(null);
+    if (onSportSelect) {
+      onSportSelect(sportName);
     }
   };
 
   return (
-    <div className={styles.sideBar}>
-      <AutocompleteCP data={allSports} />
-      <div className={styles.tree}>
-        <Tree onDataRecieve={handleSport} />
+    <aside className={styles.sideBar}>
+      {/* загальний хедер блоку */}
+      <div className={styles.sideBarHeader}>
+        <h2 className={styles.sideBarTitle}>Каталог видів спорту</h2>
+        <p className={styles.sideBarSubtitle}>
+          Оберіть категорію або введіть назву, щоб відфільтрувати локації на
+          мапі.
+        </p>
       </div>
-    </div>
+
+      {/* пошук по видах спорту — той самий компонент, що й раніше */}
+      <div className={styles.searchRow}>
+        <AutocompleteCP data={allSports} onSportSelect={handleSport} />
+      </div>
+
+      {/* сам каталог (новий Tree з чіпами) */}
+      <div className={styles.treeOuter}>
+        <Tree data={sportsTreeData} onDataRecieve={handleSport} />
+      </div>
+    </aside>
   );
 };
 

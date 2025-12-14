@@ -1,44 +1,222 @@
 .contentContainer {
+  flex: 1;
   display: grid;
-  grid-template-columns: 250px 1fr; /* 1 колонка для SideBar, 4 колонки для Map і PlaceCard */
-  gap: 0;
-  height: 100vh;
-
-  position: relative;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.1rem 1.6rem 0;
 }
 
 .sidebar {
-  grid-column: 1 / 2;
-  background-color: #000; /* Можна додати, щоб було видно кордони контейнера */
+  height: calc(100vh - 100px);
+  position: sticky;
+  top: 84px; /* висота навбару */
 }
 
-.map-container {
-  grid-column: 2 / span 4; /* Займає 2-5 колонки спочатку */
+/* main column: topbar + map */
+.mainArea {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background-color: #fff; /* Можна додати, щоб було видно кордони контейнера */
+  gap: 0.9rem;
+
+  /* карта повинна займати весь доступний простір */
+  min-height: calc(100vh - 130px);
 }
 
-.map-container.map-collapsed {
-  grid-column: 2 / span 3; /* Займає 2-4 колонки при відображенні PlaceCard */
+/* топбар над картою */
+.topBar {
+  padding: 0.65rem 0.9rem 0.7rem;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--bg-elevated-soft);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
-.map {
+.topBarRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* інпут пошуку */
+.searchInput {
+  position: relative;
   flex: 1;
-  height: 100%; /* Забезпечити, щоб карта займала всю висоту контейнера */
-  width: 100%; /* Забезпечити, щоб карта займала всю ширину контейнера */
+  min-width: 180px;
 }
 
-.place-card-container {
-  display: none;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
-  background-color: #fff; /* Можна додати, щоб було видно кордони контейнера */
+.searchInput input {
+  width: 100%;
+  padding: 0.45rem 2.3rem 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    background 0.16s ease;
 }
 
-.place-card-container.visible {
+.searchInput input::placeholder {
+  color: var(--text-muted);
+}
+
+.searchInput input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+  background: var(--input-bg);
+}
+
+.clearSearchBtn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* бейдж кількості результатів */
+.resultsBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--bg-elevated);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* рядок з фільтрами */
+.filtersRow {
   display: flex;
-  grid-column: 5 / 6; 
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+
+/* «чіпи» фільтрів */
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--pill-bg);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.12s ease,
+    color 0.16s ease;
+}
+
+.chip:hover {
+  background: var(--bg-elevated-soft);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+  color: var(--text-primary);
+}
+
+.chipActive {
+  background: var(--pill-bg-active);
+  color: var(--chip-text);
+  border-color: transparent;
+}
+
+.chipClose {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* кнопка «скинути фільтри» */
+.clearAllBtn {
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  border: 1px dashed var(--border-subtle);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition:
+    border-color 0.16s ease,
+    color 0.16s ease,
+    background 0.16s ease;
+}
+
+.clearAllBtn:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  background: var(--bg-elevated-soft);
+}
+
+/* карта */
+.map-container {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--bg-main);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+
+  /* ключова штука */
+  flex: 1;
+  min-height: 460px; /* щоб була видима навіть на маленьких екранах */
+}
+
+/* якщо відкритий PlaceCard — за потреби можна додати стилі */
+.map-collapsed {
+}
+
+/* мобільний / планшетний режим */
+@media (max-width: 960px) {
+  .contentContainer {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 0.9rem 1rem 1.2rem;
+  }
+
+  .sidebar {
+    order: 2;
+    position: static;
+    height: auto;
+  }
+
+  .mainArea {
+    order: 1;
+    min-height: calc(100vh - 140px);
+  }
+
+  .map-container {
+    height: calc(100vh - 180px);
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topBarRow {
+    align-items: flex-start;
+  }
+
+  .resultsBadge {
+    margin-top: 0.25rem;
+  }
 }

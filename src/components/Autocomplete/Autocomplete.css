@@ -1,27 +1,116 @@
-.textfieldLabel {
-  color: white !important;
+/* оболонка навколо поля автокомпліту */
+.autocomplete-shell {
+  border-radius: 999px;
+  padding: 2px;
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--surface-glass);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
 }
 
-#combo-box-demo {
-  color: white !important;
-}
-
+/* кореневий інпут */
 .autocomplete {
   padding: 5px;
 }
 
-.autocomplete .MuiInputBase-input {
-  color: white !important;
+.autocomplete .MuiOutlinedInput-root {
+  border-radius: 999px !important;
+  padding-left: 0.4rem;
+  background: var(--chip-bg);
+  color: var(--text-primary);
 }
 
+/* рамка MUI — прибираємо дефолт, керуємо самі */
 .autocomplete .MuiOutlinedInput-notchedOutline {
-  border-color: white !important;
+  border-color: transparent !important;
 }
 
-.autocomplete .MuiSvgIcon-root {
-  display: none; /* Прибираємо трикутник */
+.autocomplete .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--accent) !important;
+}
+
+/* текст у полі */
+.autocomplete .MuiInputBase-input {
+  color: var(--text-primary) !important;
+  font-size: 0.85rem;
 }
 
 .autocomplete .MuiInputBase-input::placeholder {
-  color: #b0b0b0 !important; /* Темніший placeholder */
+  color: var(--text-muted) !important;
+}
+
+/* ховаємо стандартну стрілку */
+.autocomplete .MuiSvgIcon-root {
+  display: none;
+}
+
+/* іконка лупи */
+.autocomplete-icon {
+  margin-right: 0.35rem;
+  color: var(--accent);
+}
+
+/* popper/paper дропдауну */
+.autocomplete-popper {
+  z-index: 1300;
+}
+
+/* ГОЛОВНИЙ контейнер списку (Paper) */
+.autocomplete-paper {
+  margin-top: 0.35rem;
+  border-radius: 18px !important;
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--surface-card) !important;           /* 🔹 прибиваємо білий фон */
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft) !important;
+  overflow: hidden;                           /* щоб не стирчали білі краї */
+}
+
+/* запасний селектор — якщо MUI не підхопить клас через slotProps */
+.MuiPaper-root.MuiAutocomplete-paper {
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--surface-card) !important;
+  border-radius: 18px !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft) !important;
+  overflow: hidden;
+}
+
+/* список опцій всередині */
+.autocomplete-paper .MuiAutocomplete-listbox,
+.MuiAutocomplete-paper .MuiAutocomplete-listbox {
+  padding: 4px 0;
+  background: transparent;                    /* без білого фону */
+}
+
+/* елементи списку */
+.autocomplete-paper .MuiAutocomplete-option,
+.MuiAutocomplete-paper .MuiAutocomplete-option {
+  font-size: 0.86rem;
+  padding-block: 6px;
+  background: transparent;
+}
+
+/* hover / selected */
+.autocomplete-paper .MuiAutocomplete-option.Mui-focused,
+.autocomplete-paper .MuiAutocomplete-option[aria-selected="true"],
+.MuiAutocomplete-paper .MuiAutocomplete-option.Mui-focused,
+.MuiAutocomplete-paper .MuiAutocomplete-option[aria-selected="true"] {
+  background: rgba(56, 189, 248, 0.16);
+}
+
+/* заголовок групи (Індивідуальні/Командні) */
+.autocomplete-paper .MuiAutocomplete-groupLabel,
+.MuiAutocomplete-paper .MuiAutocomplete-groupLabel {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding-top: 6px;
 }

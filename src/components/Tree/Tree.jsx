@@ -1,123 +1,118 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Tree.module.css";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { TreeView } from "@mui/x-tree-view/TreeView";
-import { TreeItem } from "@mui/x-tree-view/TreeItem";
-import sportJson from "../../data/sports.data.json";
 
-const Tree = ({ onDataRecieve }) => {
-  const [data, setData] = useState({});
-  const [expanded, setExpanded] = useState([]);
-  const [selected, setSelected] = useState([]);
+const Tree = ({ onDataRecieve, data }) => {
+  const [treeData, setTreeData] = useState({});
+  const [openCategory, setOpenCategory] = useState(null);
+  const [selectedKey, setSelectedKey] = useState(null);
 
   useEffect(() => {
-    // Загрузка данных из JSON файла
-    setData(sportJson["Kinds of sports"]);
-  }, []);
+    if (data && Object.keys(data).length > 0) {
+      setTreeData(data);
+      // за замовчуванням відкриваємо першу категорію
+      const firstCat = Object.keys(data)[0];
+      setOpenCategory(firstCat || null);
+    }
+  }, [data]);
 
-  const handleToggle = (event, nodeIds) => {
-    setExpanded(nodeIds);
+  const handleToggleCategory = (category) => {
+    setOpenCategory((prev) => (prev === category ? null : category));
   };
 
-  const handleSelect = (event, nodeIds) => {
-    setSelected(nodeIds);
-    const selectedNodeId = nodeIds[nodeIds.length - 1];
-    const nodeName = getNodeNameById(data, selectedNodeId);
-    if (nodeName) {
-      onDataRecieve(nodeName);
+  const handleChipClick = (category, groupName, label) => {
+    const key = `${category}-${groupName}-${label}`;
+    setSelectedKey(key);
+    if (onDataRecieve) {
+      onDataRecieve(label); // label = підвид або назва виду спорту
     }
   };
 
-  const handleExpandClick = () => {
-    setExpanded((oldExpanded) => {
-      if (oldExpanded.length === 0) {
-        // Collect all nodeIds to expand
-        const allNodeIds = [];
-        Object.keys(data).forEach((key) => {
-          allNodeIds.push(key);
-          data[key].forEach((item) => {
-            const nodeId = `${key}-${item.Name}`;
-            allNodeIds.push(nodeId);
-            if (item.Subspecies.length > 0) {
-              item.Subspecies.forEach((sub) => {
-                allNodeIds.push(`${nodeId}-${sub}`);
-              });
-            }
-          });
-        });
-        return allNodeIds;
-      } else {
-        return [];
-      }
-    });
-  };
-
-  const getNodeNameById = (data, nodeId) => {
-    for (let key of Object.keys(data)) {
-      for (let el of data[key]) {
-        for (let sub of el.Subspecies) {
-          if (`${key}-${el.Name}-${sub}` === nodeId) {
-            return sub;
-          }
-        }
-        if (`${key}-${el.Name}` === nodeId && el.Subspecies.length === 0) {
-          return el.Name;
-        }
-      }
-    }
-    return null;
-  };
-
-  const renderTree = (data) => {
-    return Object.keys(data).map((key) => (
-      <TreeItem id={key} key={key} nodeId={key} label={key}>
-        {data[key].map((el) => {
-          const nodeId = `${key}-${el.Name}`;
-          return (
-            <TreeItem id={nodeId} key={nodeId} nodeId={nodeId} label={el.Name}>
-              {el.Subspecies.length > 0
-                ? el.Subspecies.map((sub) => (
-                    <TreeItem
-                      id={`${nodeId}-${sub}`}
-                      key={`${nodeId}-${sub}`}
-                      nodeId={`${nodeId}-${sub}`}
-                      label={sub}
-                    />
-                  ))
-                : null}
-            </TreeItem>
-          );
-        })}
-      </TreeItem>
-    ));
-  };
+  if (!treeData || Object.keys(treeData).length === 0) {
+    return (
+      <div className={styles.treeWrapper}>
+        <div className={styles.treeHeader}>
+          <span className={styles.treeHeaderLabel}>Види спорту</span>
+        </div>
+        <div className={styles.treeBodyMuted}>Завантаження...</div>
+      </div>
+    );
+  }
 
   return (
-    <Box
-      className={styles.tree}
-      sx={{ minHeight: 270, flexGrow: 1, maxWidth: 350 }}
-    >
-      <Box sx={{ mb: 1 }}>
-        <Button onClick={handleExpandClick}>
-          {expanded.length === 0 ? "Розгорнути все" : "Згорнути все"}
-        </Button>
-      </Box>
-      <TreeView
-        aria-label="controlled"
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-        expanded={expanded}
-        selected={selected}
-        onNodeToggle={handleToggle}
-        onNodeSelect={handleSelect}
-        multiSelect
-      >
-        {renderTree(data)}
-      </TreeView>
-    </Box>
+    <div className={styles.treeWrapper}>
+      <div className={styles.treeHeader}>
+        <span className={styles.treeHeaderLabel}>Каталог видів спорту</span>
+      </div>
+
+      <div className={styles.treeBody}>
+        {Object.keys(treeData).map((category) => (
+          <div key={category} className={styles.categoryBlock}>
+            <button
+              type="button"
+              className={`${styles.categoryButton} ${
+                openCategory === category ? styles.categoryButtonOpen : ""
+              }`}
+              onClick={() => handleToggleCategory(category)}
+            >
+              <span>{category}</span>
+              <span className={styles.chevron}>
+                {openCategory === category ? "−" : "+"}
+              </span>
+            </button>
+
+            {openCategory === category && (
+              <div className={styles.categoryContent}>
+                {treeData[category].map((item) => {
+                  const hasSub =
+                    Array.isArray(item.Subspecies) &&
+                    item.Subspecies.length > 0;
+
+                  // якщо підвидів нема – робимо один чіп з назвою виду спорту
+                  const chips = hasSub ? item.Subspecies : [item.Name];
+
+                  return (
+                    <div key={item.Name} className={styles.sportGroup}>
+                      {hasSub && (
+                        <button
+                          type="button"
+                          className={styles.sportName}
+                          disabled
+                        >
+                          {item.Name}
+                        </button>
+                      )}
+
+                      <div className={styles.subspeciesRow}>
+                        {chips.map((sub) => {
+                          const label = hasSub ? sub : item.Name;
+                          const chipKey = `${category}-${item.Name}-${label}`;
+                          const isActive = selectedKey === chipKey;
+
+                          return (
+                            <button
+                              key={chipKey}
+                              type="button"
+                              className={`${styles.chip} ${
+                                isActive ? styles.chipActive : ""
+                              }`}
+                              onClick={() =>
+                                handleChipClick(category, item.Name, label)
+                              }
+                            >
+                              {label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

@@ -1,50 +1,152 @@
 .registrationFormContainer {
+  min-height: calc(100vh - 80px);
+  padding: 3rem 1rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   position: relative;
 }
 
+/* картка реєстрації */
 .registrationForm {
-  /* max-width: 300px;
-  width: 50%; */
-  /* padding: 16px; */
-
+  width: 100%;
+  max-width: 460px;
+  padding: 1.9rem 1.9rem 2.2rem;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--bg-elevated-soft);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
   text-align: left;
   margin: 0 auto;
   position: relative;
 }
 
-.formContainer {
-  margin-top: 16px;
-}
-
 .formTitle {
-  font-size: 40px;
+  font-size: 1.9rem;
   text-align: center;
+  margin: 0 0 1rem;
+  color: var(--text-soft);
 }
 
+.formContainer {
+  margin-top: 0.3rem;
+}
+
+/* групи полів */
+.inputGroup {
+  margin-bottom: 0.9rem;
+  width: 100%;
+  max-width: 360px;
+  padding-bottom: 0.2rem;
+  text-align: left;
+  margin-inline: auto;
+  position: relative;
+}
+
+.inputGroup:nth-child(4) {
+  padding-bottom: 0.4rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* інпут */
+.inputGroup input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  outline: none;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    background 0.16s ease;
+}
+
+.inputGroup input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+/* повідомлення */
+.errorMessage {
+  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  color: #fecaca;
+}
+
+.successMessage {
+  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  color: #bbf7d0;
+}
+
+/* кнопка реєстрації */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 70%;
+  max-width: 260px;
+  padding: 0.65rem 1rem;
+  background: linear-gradient(135deg, #38bdf8, #a855ff);
+  color: #020617;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  margin: 0.7rem auto 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.18s ease,
+    filter 0.16s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.65);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.75);
+}
+
+/* лінк "Форма входу" */
+.btnBack {
+  display: block;
+  margin: 0.8rem auto 0;
+  text-decoration: none;
+  text-align: center;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.btnBack:hover {
+  text-decoration: underline;
+}
+
+/* картинки */
 .leftImage,
 .rightImage {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.inputGroup {
-  margin-bottom: 20px;
-  width: 300px;
-  padding-bottom: 4px;
-  text-align: left;
-  margin: 0 auto;
-  padding-left: 16px;
-
-  position: relative;
-}
-
-.inputGroup:nth-child(3n) {
-  padding-bottom: 24px;
+  opacity: 0.16;
+  pointer-events: none;
 }
 
 .leftImage {
@@ -62,54 +164,24 @@
   transform: scaleX(-1);
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
+/* адаптив */
+@media (max-width: 960px) {
+  .leftImage,
+  .rightImage {
+    display: none;
+  }
+
+  .registrationFormContainer {
+    padding-top: 2.5rem;
+  }
 }
 
-input {
-  width: calc(100% - 16px);
-  padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+@media (max-width: 480px) {
+  .registrationForm {
+    padding: 1.5rem 1.25rem 1.9rem;
+  }
 
-.errorMessage {
-  color: red;
-  position: absolute;
-  bottom: -16px;
-}
-
-.btn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 60%;
-  padding: 10px;
-  background-color: #000000;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin: 0 auto;
-  transition: background-color 0.3s;
-}
-
-.btn:hover {
-  background-color: #363636;
-}
-
-.btnBack {
-  display: block;
-  margin: 0 auto;
-  text-decoration: none;
-  text-align: center;
-  color: #000;
-  cursor: pointer;
-}
-
-.btnBack:hover {
-  color: #363636;
+  .btn {
+    width: 100%;
+  }
 }

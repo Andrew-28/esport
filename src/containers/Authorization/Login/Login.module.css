@@ -1,105 +1,177 @@
 .container {
+  min-height: calc(100vh - 80px);
+  padding: 3rem 1rem 2rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   position: relative;
+}
+
+/* картка форми */
+.loginForm {
+  width: 100%;
+  max-width: 420px;
+  padding: 1.75rem 1.75rem 2rem;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, var(--accent-soft), transparent),
+    var(--bg-elevated-soft);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+/* заголовок */
+.formTitle {
+  margin: 0 0 1rem;
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--text-soft);
+}
+
+/* форма всередині */
+.loginForm form {
   width: 100%;
 }
 
-.loginForm {
-  max-width: 300px;
-  width: 50%;
-  margin: 0 auto;
-}
-
-.formTitle {
-  text-align: center;
-}
-
-form {
-  width: 300px;
-}
-
+/* група поля */
 .inputGroup {
-  margin-bottom: 20px;
-  max-width: 500px;
-  padding: 16px;
-  text-align: left;
-  margin: 0 auto;
-
+  margin-bottom: 1rem;
   position: relative;
 }
 
 .inputLabel {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
 }
 
+/* інпут */
 .inputField {
   width: 100%;
-  padding: 8px;
+  padding: 0.6rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
   box-sizing: border-box;
+  outline: none;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    background 0.16s ease;
 }
 
-.btnContainer {
-  margin-top: 10px;
+.inputField:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
 
+/* помилка */
+.errorMessage {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  color: #fecaca;
+}
+
+/* кнопка */
+.btnContainer {
+  margin-top: 0.6rem;
   display: flex;
   justify-content: center;
-  border: none;
 }
 
 .btn {
-  width: 60%;
-  padding: 10px;
-  background-color: #000000;
-  color: #fff;
+  width: 70%;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
   border: none;
+  background: linear-gradient(135deg, #38bdf8, #a855ff);
+  color: #020617;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  margin: 0 auto;
-  transition: background-color 0.3s;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.18s ease,
+    filter 0.16s ease;
 }
 
 .btn:hover {
-  background-color: #363636;
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.65);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.75);
+}
+
+/* лінк на реєстрацію */
+.registerLink {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: 0.85rem;
 }
 
 .registerLink a {
+  color: var(--accent);
   text-decoration: none;
-  text-align: center;
-  color: #000;
-  &:hover {
-    color: #4e4e4e;
-  }
 }
 
-.errorMessage {
-  color: red;
-  position: absolute;
-  bottom: -20px;
+.registerLink a:hover {
+  text-decoration: underline;
 }
 
-/* Image styles */
-
+/* картинки по боках */
 .leftImage,
 .rightImage {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  opacity: 0.16;
+  pointer-events: none;
 }
+
+html[data-theme="dark"] .leftImage,
+html[data-theme="dark"] .rightImage {
+  filter: invert(1) brightness(1.2) contrast(0.9);
+}
+
 
 .leftImage {
   left: 0;
   margin-left: 5%;
-  width: 25%;
+  width: 24%;
 }
 
 .rightImage {
-  top: 25%;
   right: 0;
   margin-right: 5%;
-  width: 25%;
-  transform: scaleX(-1);
+  width: 24%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+/* адаптив */
+@media (max-width: 960px) {
+  .leftImage,
+  .rightImage {
+    display: none;
+  }
+
+  .container {
+    padding-top: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginForm {
+    padding: 1.4rem 1.25rem 1.8rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }

@@ -1,49 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
-@font-face {
-  font-family: "Dnipro";
-  src: url("./utils/fonts/DniproCity-Regular.6980d841aa7b28436da8.otf")
-    format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-* {
-  font-family: "Dnipro", sans-serif;
-  box-sizing: border-box;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.contentContainer {
-  /* display: flex;
-  flex-direction: row; */
-}
-
 .map {
   width: 800px;
   height: 600px;
   display: block;
 }
 
-/* :root {
-  .css-yjsfm1 {
-    color: white;
-  }
-  .css-yjsfm1 > span {
-    color: white;
-  }
+/* Кнопка "skip to content" — тепер теж на змінних теми */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  z-index: 2000;
+  transition: left 0.15s ease-out, box-shadow 0.15s ease-out, transform 0.15s ease-out;
+}
 
-  .MuiTextField-root {
-    color: white;
-  }
+.skip-link:focus-visible {
+  left: 0.75rem;
+  box-shadow: 0 0 0 2px var(--accent-soft);
+  transform: translateY(-1px);
+}
 
-  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
-    color: rgb(255, 255, 255);
-  }
-
-  .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon.css-fii3ml-MuiAutocomplete-root
-    .MuiOutlinedInput-root {
-    color: rgb(255, 255, 255);
-  }
-} */
+/* Загальний фокус для всіх інтерактивних елементів */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  /* box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35); */
+}

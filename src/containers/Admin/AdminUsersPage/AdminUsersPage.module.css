@@ -1,0 +1,274 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.pageSubtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.left,
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.summaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.searchBlock {
+  margin-top: 0.25rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-card-soft);
+  color: var(--text-primary);
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+
+.filterChip {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.8rem;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  cursor: pointer;
+}
+
+.filterChipActive {
+  background: var(--chip-bg-active);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.listCard {
+  border-radius: var(--radius-xl);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-subtle);
+  padding: 0.5rem;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  padding: 0.45rem 0.6rem;
+  border-radius: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.listItem+.listItem {
+  margin-top: 0.25rem;
+}
+
+.listItem:hover {
+  /* background: rgba(15, 23, 42, 0.55); */
+  border-color: rgba(148, 163, 184, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.75);
+}
+
+.listItemActive {
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.listTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.listTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.roleBadge {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.roleBadgeAdmin {
+  background: rgba(52, 211, 153, 0.15);
+  border-color: rgba(52, 211, 153, 0.7);
+}
+
+.roleBadgeUser {
+  background: rgba(148, 163, 184, 0.2);
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+.listMetaRow {
+  margin-top: 0.15rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.email {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.blockedBadge {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.7);
+  color: #fecaca;
+}
+
+.listDateRow {
+  margin-top: 0.1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.error {
+  margin-top: 0.5rem;
+  color: #fecaca;
+}
+
+.muted {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Права колонка */
+
+.card {
+  border-radius: var(--radius-xl);
+  background: var(--surface-glass);
+  border: 1px solid var(--border-subtle);
+  padding: 0.75rem 0.9rem;
+}
+
+.cardTitle {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.label {
+  min-width: 120px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.value {
+  font-size: 0.9rem;
+}
+
+.select {
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  padding: 0.3rem 0.6rem;
+  /* background: rgba(15, 23, 42, 0.85); */
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+
+  input {
+    width: fit-content;
+  }
+}
+
+.actionsRow {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.primaryButton {
+  border-radius: 999px;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, #38bdf8, #a855ff);
+  color: #f9fafb;
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.success {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #bbf7d0;
+}
+
+.placeholder {
+  border-radius: var(--radius-xl);
+  background: var(--surface-glass);
+  border: 1px dashed var(--border-subtle);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}

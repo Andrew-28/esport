@@ -1,8 +1,12 @@
-/* .map {
-  height: calc(100vh - 60px);
-} */
 .mapContainer {
-  border: 3px solid rgb(83, 57, 202);
   width: 100%;
   height: 100%;
+  border-radius: inherit; /* повторюємо радіус контейнера зверху */
+  overflow: hidden;
 }
+
+/* якщо захочеш додати легку рамку саме для тайлів — можна так:
+   .mapContainer > div {
+     border-radius: inherit;
+   }
+*/

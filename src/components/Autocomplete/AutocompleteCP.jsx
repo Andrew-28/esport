@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import SearchIcon from "@mui/icons-material/Search";
 import "./Autocomplete.css";
 
 function transformData(data) {
+  if (!data) return [];
   const transformedData = [];
   for (let i = 0; i < data.length; i++) {
     const { Name, Subspecies } = data[i];
@@ -11,7 +13,7 @@ function transformData(data) {
     for (const subspecies of Subspecies) {
       transformedData.push({
         label: subspecies,
-        year: Name,
+        group: Name,
       });
     }
   }
@@ -19,41 +21,51 @@ function transformData(data) {
   return transformedData;
 }
 
-const AutocompleteCP = ({ data }) => {
-  const [isFocused, setIsFocused] = useState(true);
-  const arr = transformData(data);
+const AutocompleteCP = ({ data, onSportSelect }) => {
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    // Фокусування при завантаженні компонента
-    const timer = setTimeout(() => {
-      setIsFocused(false);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+    setOptions(transformData(data));
+  }, [data]);
 
   return (
-    <Autocomplete
-      className="autocomplete"
-      disablePortal
-      id="combo-box-demo"
-      options={arr}
-      sx={{ width: 250 }}
-      renderInput={(params) => (
-        <TextField
-          // inputRef={(input) => input && input.focus()} ИЗБАВЛЯЕМСЯ ОТ ЭТОГО
-          {...params}
-          label="Знайти вид спорту"
-          margin="dense"
-          variant="outlined"
-          sx={{ color: "white" }}
-          InputLabelProps={{
-            className: `textfieldLabel`,
-          }}
-          // onFocus={() => setIsFocused(true)}
-          // onBlur={() => setIsFocused(false)}
-        />
-      )}
-    />
+    <div className="autocomplete-shell">
+      <Autocomplete
+        className="autocomplete"
+        disablePortal
+        id="sport-autocomplete"
+        options={options}
+        groupBy={(option) => option.group}
+        fullWidth
+        size="small"
+        onChange={(event, value) => {
+          if (value && onSportSelect) {
+            onSportSelect(value.label);
+          }
+        }}
+        slotProps={{
+          paper: { className: "autocomplete-paper" },
+          popper: { className: "autocomplete-popper" },
+        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            placeholder="Знайти вид спорту…"
+            variant="outlined"
+            margin="none"
+            InputLabelProps={{
+              shrink: false,
+            }}
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <SearchIcon className="autocomplete-icon" fontSize="small" />
+              ),
+            }}
+          />
+        )}
+      />
+    </div>
   );
 };
 
