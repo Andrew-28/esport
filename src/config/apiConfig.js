@@ -2,7 +2,7 @@
 
 // Базова адреса API. На деві це localhost, на проді — твій домен.
 export const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+  'https://e-sport-acd1548b2c0b.herokuapp.com';
 
 /**
  * Цей невеликий модуль дозволяє:
