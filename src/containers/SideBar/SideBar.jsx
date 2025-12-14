@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import styles from "./SideBar.module.css";
 import { Tree } from "../../components/Tree";
 import { AutocompleteCP } from "../../components/Autocomplete";
+import { API_BASE_URL } from "../../config/apiConfig";
 
 const SideBar = ({ onSportSelect }) => {
   const [sportsTreeData, setSportsTreeData] = useState(null);
   const [allSports, setAllSports] = useState([]);
 
-  const url = process.env.REACT_APP_API_URL || "http://localhost:5000";
-
   useEffect(() => {
     const fetchSports = async () => {
       try {
-        const res = await fetch(`${url}/api/sports`);
+        const res = await fetch(`${ API_BASE_URL}/api/sports`);
         if (!res.ok) {
           throw new Error("Помилка завантаження видів спорту");
         }

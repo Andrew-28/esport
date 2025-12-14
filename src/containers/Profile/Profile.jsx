@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Navigation/AuthContext";
+import { API_BASE_URL } from "../../config/apiConfig";
 import "./Profile.css";
 
 const Profile = () => {
@@ -27,7 +28,6 @@ const Profile = () => {
     }
   }, [isLoading, isAuthenticated]);
 
-  const url = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -38,7 +38,7 @@ const Profile = () => {
 
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`${url}/api/profile/me`, {
+        const res = await fetch(`${API_BASE_URL}/api/profile/me`, {
           headers: {
             "Content-Type": "application/json",
             "x-auth-token": token,
@@ -89,7 +89,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`${url}/api/profile/me`, {
+      const res = await fetch(`${API_BASE_URL}/api/profile/me`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import { SideBar } from "../SideBar";
 import { Map } from "../../components/Map";
 import { PlaceCard } from "../PlaceCard";
 import style from "./Home.module.css";
+import { API_BASE_URL } from "../../config/apiConfig";
 
 const Home = () => {
   const [places, setPlaces] = useState(null);
@@ -17,13 +18,11 @@ const Home = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const url = process.env.REACT_APP_API_URL || "http://localhost:5000";
-
   // завантаження місць з бекенду
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const res = await fetch(`${url}/api/places`);
+        const res = await fetch(`${API_BASE_URL}/api/places`);
         if (!res.ok) {
           throw new Error("Помилка завантаження місць");
         }
