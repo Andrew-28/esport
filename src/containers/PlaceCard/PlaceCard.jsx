@@ -256,83 +256,78 @@ const PlaceCard = ({ place, onClose }) => {
         ✕
       </button>
 
-      <PhotoGrid photos={place.photos} />
-      <PlaceInfo
-        name={place.name}
-        description={[
-          place.description,
-          place.adress,
-          place.contacts,
-          place.workingHours,
-        ]}
-      />
+      <div className="place-card__content">
+        <PhotoGrid photos={place.photos} />
 
-      <div className="rating-section">
-        <h3>Оцінка</h3>
-        <Rating
-          rating={userRating ?? avgRating}
-          onChange={handleRatingChange}
-          disabled={false}
+        <PlaceInfo
+          name={place.name}
+          description={[
+            place.description,
+            place.adress,
+            place.contacts,
+            place.workingHours,
+          ]}
         />
-        <p className="rating-info">
-          Середня оцінка: {avgRating.toFixed(1)} ({ratingsCount} голосів)
-        </p>
-        {userRating && (
-          <p className="rating-info">Ваша оцінка: {userRating}</p>
-        )}
-        {ratingError && <p className="error">{ratingError}</p>}
-      </div>
 
-      {/* Обране */}
-      <button
-        type="button"
-        className="favorite-btn"
-        onClick={handleToggleFavorite}
-      >
-        {isFavorite ? "Прибрати з обраних" : "Додати в обрані"}
-      </button>
-      {favError && <p className="error">{favError}</p>}
+        <div className="rating-section">
+          <h3>Оцінка</h3>
+          <Rating
+            rating={userRating ?? avgRating}
+            onChange={handleRatingChange}
+            disabled={false}
+          />
+          <p className="rating-info">
+            Середня оцінка: {avgRating.toFixed(1)} ({ratingsCount} голосів)
+          </p>
+          {userRating && <p className="rating-info">Ваша оцінка: {userRating}</p>}
+          {ratingError && <p className="error">{ratingError}</p>}
+        </div>
 
-      {/* Маршрут */}
-      <div className="route-section">
         <button
           type="button"
-          className="route-btn"
-          onClick={handleOpenRoute}
+          className="favorite-btn btn"
+          onClick={handleToggleFavorite}
         >
-          Прокласти маршрут
+          {isFavorite ? "Прибрати з обраних" : "Додати в обрані"}
         </button>
-        {routeError && <p className="error">{routeError}</p>}
-      </div>
+        {favError && <p className="error">{favError}</p>}
 
-      {/* Коментарі */}
-      <div className="comments-section">
-        <h3>Коментарі</h3>
-        <form onSubmit={handleSubmit}>
-          <textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Залишити коментар"
-          />
-          <button type="submit" className="comment-submit-btn">
-            Відправити
+        <div className="route-section">
+          <button type="button" className="route-btn btn" onClick={handleOpenRoute}>
+            Прокласти маршрут
           </button>
-        </form>
-        {error && <p className="error">{error}</p>}
-        <ul>
-          {comments.map((comment) => (
-            <li key={comment._id}>
-              <p>{comment.text}</p>
-              <small>
-                {comment.user?.name} ({comment.user?.email}) -{" "}
-                {new Date(comment.date).toLocaleString()}
-              </small>
-            </li>
-          ))}
-        </ul>
+          {routeError && <p className="error">{routeError}</p>}
+        </div>
+
+        <div className="comments-section">
+          <h3>Коментарі</h3>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Залишити коментар"
+            />
+            <button type="submit" className="comment-submit-btn btn">
+              Відправити
+            </button>
+          </form>
+          {error && <p className="error">{error}</p>}
+          <ul>
+            {comments.map((comment) => (
+              <li key={comment._id}>
+                <p>{comment.text}</p>
+                <small>
+                  {comment.user?.name} ({comment.user?.email}) -{" "}
+                  {new Date(comment.date).toLocaleString()}
+                </small>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
+
 };
 
 export default PlaceCard;

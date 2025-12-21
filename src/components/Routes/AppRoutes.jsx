@@ -5,6 +5,7 @@ import { Home } from "../../containers/Home";
 import { Registration } from "../../containers/Authorization/Registration";
 import { SuggestPlace } from "../../containers/SuggestPlace";
 import News from "../../containers/News/News";
+import NewsDetails from "../../containers/News/NewsDetails";
 import Profile from "../../containers/Profile/Profile";
 
 // нові імпорти:
@@ -29,6 +30,7 @@ const AppRoutes = () => {
       <Route path="/registration" element={<Registration />} />
       <Route path="/suggest-place" element={<SuggestPlace />} />
       <Route path="/news" element={<News />} />
+      <Route path="/news/:id" element={<NewsDetails />} />
       <Route path="/profile" element={<Profile />} />
 
       {/* адмінка */}
